@@ -1,0 +1,28 @@
+<?php
+require "../backend/user.php";
+User::isLoggedIn();
+echo $_SESSION['username'] . " is logged in!"; // Display the logged-in user's username 
+
+$buttonClicked = $_POST['logout'] ?? false; // Check if the logout button was clicked
+if ($buttonClicked) {
+    User::logoutUser(); // Call the logoutUser method to handle the logout process
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Welcome to Lashop!</h1>
+    <form method="POST" action="">
+        <input type="submit" name="logout" value="Logout">
+    </form>
+</body>
+
+</html>
