@@ -97,6 +97,20 @@ class User
             echo "Error checking login status: " . $e->getMessage();
         }
     }
+
+    public static function getUserInformation($user_id)
+    {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+        try {
+            $stmt = $conn->prepare("SELECT * FROM user_login WHERE id = :user_id");
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error fetching user: " . $e->getMessage();
+        }
+    }
 }
 
 // $user = User::getUserByEmail("engocarl03@gmail.com"); //  This will fetch the user information from the database based on the provided email
