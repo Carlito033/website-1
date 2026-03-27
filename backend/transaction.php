@@ -11,32 +11,32 @@ class Transaction extends User
         $this->amount = $amount;
     }
 
-    public static function getTranscation()
+    public static function getTransaction()
     {
         $db = Database::getInstance();
         $conn = $db->getConnection();
         try {
-            $stmt = $conn->prepare("SELECT * FROM user_transcation");
+            $stmt = $conn->prepare("SELECT * FROM user_transactions");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Error fetching data transcation " . $e->getMessage();
+            echo "Error fetching data transaction " . $e->getMessage();
         }
     }
 
-    public static function createTranscation($amount)
+    public static function createTransaction($amount)
     {
         $db = Database::getInstance();
         $conn = $db->getConnection();
         try {
-            $stmt = $conn->prepare("INSERT INTO user_transcation (amount) VALUES (:amounth");
-            $stmt->bindParam(":amounth", $amount);
+            $stmt = $conn->prepare("INSERT INTO user_transactions (amount) VALUES (:amounth");
+            $stmt->bindParam(":amount", $amount);
             $stmt->execute();
         } catch (PDOException $e) {
-            echo "Error creating transcation: " . $e->getMessage();
+            echo "Error creating transaction: " . $e->getMessage();
         }
     }
-    public static function deleteTranscation($id)
+    public static function deleteTransaction($id)
     {
         $db = Database::getInstance();
         $conn = $db->getConnection();
@@ -45,19 +45,19 @@ class Transaction extends User
             $stmt->bindParam(":id", $id);
             $stmt->execute();
         } catch (PDOException $e) {
-            echo "Error delete transcation: " . $e->getMessage();
+            echo "Error delete transaction: " . $e->getMessage();
         }
     }
-    public static function updateTranscation($id, $amount)
+    public static function updateTransaction($id, $amount)
     {
         $db = Database::getInstance();
         $conn = $db->getConnection();
         try {
-            $stmt = $conn->prepare("UPDATE user_transcation SET amount = :amount WHERE id = :id");
+            $stmt = $conn->prepare("UPDATE user_transactions SET amount = :amount WHERE id = :id");
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":amount", $amount);
         } catch (PDOException $e) {
-            echo "Error update transcation:" . $e->getMessage();
+            echo "Error update transaction:" . $e->getMessage();
         }
     }
 }

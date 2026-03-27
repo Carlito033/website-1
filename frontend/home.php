@@ -2,7 +2,8 @@
 require "../backend/user.php";
 require "../backend/transaction.php";
 User::isLoggedIn();
-Transaction::getTranscation();
+Transaction::getTransaction();
+$transactions = Transaction::getTransaction();
 
 // echo $_SESSION['username'] . " is logged in!"; // Display the logged-in user's username 
 
@@ -71,7 +72,7 @@ if ($buttonClicked) {
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Created At</th>
@@ -80,12 +81,16 @@ if ($buttonClicked) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
+                    <?php for ($i = 0; $i < count($transactions); $i++) { ?>
+                        <tr>
+                            <td><?php echo $transactions[$i]['transaction_id']; ?></td>
+                            <td><?php echo $transactions[$i]['amount']; ?></td>
+                            <td><?php echo $transactions[$i]['created_at']; ?></td>
+                            <td><?php echo $transactions[$i]['updated_at']; ?></td>
+                            <td><?php echo $transactions[$i]['date']; ?></td>
+                            <td><button>Click</button></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
