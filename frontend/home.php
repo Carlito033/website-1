@@ -4,6 +4,8 @@ require "../backend/transaction.php";
 User::isLoggedIn();
 Transaction::getTransaction();
 $transactions = Transaction::getTransaction();
+$id = $_GET['id'] ?? null; // Get the transaction ID from the URL query parameter
+echo "this is id number" . $id;
 
 // echo $_SESSION['username'] . " is logged in!"; // Display the logged-in user's username 
 

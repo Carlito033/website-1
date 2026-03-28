@@ -64,7 +64,7 @@ class User
             if ($password == $user['password_hash']) { // In a real application, you should use password_verify() to compare the hashed password
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
-                Header("Location: /website-1/frontend/home.php"); // Redirect to the home page after successful login
+                Header("Location: /website-1/frontend/home.php/?id=" . $user['id']); // Redirect to the home page after successful login
 
                 // You can also return the user information or set session variables here
             } else {
