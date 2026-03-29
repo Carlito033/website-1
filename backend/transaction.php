@@ -36,28 +36,44 @@ class Transaction extends User
             echo "Error creating transaction: " . $e->getMessage();
         }
     }
-    public static function deleteTransaction($id)
-    {
-        $db = Database::getInstance();
-        $conn = $db->getConnection();
-        try {
-            $stmt = $conn->prepare("DELETE FROM user_transcation WHERE id = :id");
-            $stmt->bindParam(":id", $id);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo "Error delete transaction: " . $e->getMessage();
-        }
-    }
     public static function updateTransaction($id, $amount)
     {
         $db = Database::getInstance();
         $conn = $db->getConnection();
         try {
-            $stmt = $conn->prepare("UPDATE user_transactions SET amount = :amount WHERE id = :id");
+            $stmt = $conn->prepare("UPDATE user_transactions SET amount = :amount WHERE transaction_id = :id");
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":amount", $amount);
+            $stmt->execute();
         } catch (PDOException $e) {
             echo "Error update transaction:" . $e->getMessage();
+        }
+    }
+
+    public static function getSpecificTransaction($id)
+    {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+        try {
+            $stmt = $conn->prepare("SELECT * FROM user_transactions WHERE transaction_id = :id");
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error fetching specific transcation:" . $e->getMessage();
+        }
+    }
+
+    public static function deleteTransaction($id)
+    {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+        try {
+            $stmt = $conn->prepare("DELETE FROM user_transactions WHERE transaction_id = :id");
+            $stmt->bindParam(":id", $id);
+            $stmt->execute(); 
+        } catch (PDOException $e) {
+            echo "Error delete transaction: " . $e->getMessage();
         }
     }
 }

@@ -67,7 +67,6 @@ if ($buttonClicked) {
     <div class="container mt-4">
         <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
         <p>Transaction Logs</p>
-
         <div class="card">
             <table class="table">
                 <thead>
@@ -78,6 +77,7 @@ if ($buttonClicked) {
                         <th scope="col">Created At</th>
                         <th scope="col">Upddated At</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,8 +89,7 @@ if ($buttonClicked) {
                             <td><?php echo $transactions[$i]['updated_at']; ?></td>
                             <td><?php echo $transactions[$i]['date']; ?></td>
                             <td>
-                                <button>Update</button>
-                                <button>Delete</button>
+                                <a href="../frontend/update.php/?id=<?php echo $transactions[$i]['transaction_id']; ?>">View</a>
                             </td>
                         </tr>
                     <?php } ?>
