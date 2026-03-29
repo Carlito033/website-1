@@ -30,6 +30,8 @@ if ($buttonClicked) {
 
 <body>
 
+    <h1>Test</h1>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Lashop</a>
