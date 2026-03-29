@@ -4,8 +4,6 @@ require "../backend/transaction.php";
 User::isLoggedIn();
 Transaction::getTransaction();
 $transactions = Transaction::getTransaction();
-$id = $_GET['id'] ?? null; // Get the transaction ID from the URL query parameter
-echo "this is id number" . $id;
 
 // echo $_SESSION['username'] . " is logged in!"; // Display the logged-in user's username 
 
@@ -29,8 +27,6 @@ if ($buttonClicked) {
 </head>
 
 <body>
-
-    <h1>Test</h1>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -92,7 +88,10 @@ if ($buttonClicked) {
                             <td><?php echo $transactions[$i]['created_at']; ?></td>
                             <td><?php echo $transactions[$i]['updated_at']; ?></td>
                             <td><?php echo $transactions[$i]['date']; ?></td>
-                            <td><button>Click</button></td>
+                            <td>
+                                <button>Update</button>
+                                <button>Delete</button>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
