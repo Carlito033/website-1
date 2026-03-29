@@ -5,8 +5,10 @@ $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userOjb = new User($email, $password); // Create an instance of the User class
-    $userOjb->loginUser($email, $password); // This will attempt to log in
+    // $userOjb = new User($email, $password); // Create an instance of the User class
+    // $userOjb->loginUser($email, $password); // This will attempt to log in
+
+    User::loginUser($email, $password); // This will attempt to log in
 }
 ?>
 

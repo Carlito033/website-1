@@ -6,6 +6,7 @@ class Transaction extends User
 {
     public $amount;
 
+
     public function __contruct($amount)
     {
         $this->amount = $amount;
@@ -29,9 +30,12 @@ class Transaction extends User
         $db = Database::getInstance();
         $conn = $db->getConnection();
         try {
-            $stmt = $conn->prepare("INSERT INTO user_transactions (amount) VALUES (:amounth");
+            $default_value = "income";
+            $stmt = $conn->prepare("INSERT INTO user_transactions (amount, transaction_type) VALUES (:amount, :transaction_type)");
             $stmt->bindParam(":amount", $amount);
+            $stmt->bindParam(":transaction_type", $default_value);
             $stmt->execute();
+            header("Location: ./home.php");
         } catch (PDOException $e) {
             echo "Error creating transaction: " . $e->getMessage();
         }
@@ -45,6 +49,7 @@ class Transaction extends User
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":amount", $amount);
             $stmt->execute();
+            header("Location: ../home.php");
         } catch (PDOException $e) {
             echo "Error update transaction:" . $e->getMessage();
         }
@@ -71,7 +76,8 @@ class Transaction extends User
         try {
             $stmt = $conn->prepare("DELETE FROM user_transactions WHERE transaction_id = :id");
             $stmt->bindParam(":id", $id);
-            $stmt->execute(); 
+            $stmt->execute();
+            header("Location:../home.php");
         } catch (PDOException $e) {
             echo "Error delete transaction: " . $e->getMessage();
         }
