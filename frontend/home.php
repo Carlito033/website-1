@@ -5,8 +5,8 @@ User::isLoggedIn();
 Transaction::getTransaction();
 $transactions = Transaction::getTransaction();
 
-$buttonClicked = $_POST['logout'] ?? false; // Check if the logout button was clicked
-if ($buttonClicked) {
+
+if (isset($_POST['logout'])) {
     User::logoutUser(); // Call the logoutUser method to handle the logout process
 }
 ?>
@@ -41,11 +41,9 @@ if ($buttonClicked) {
                         <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <form method="POST" action="">
-                                <input type="submit" name="logout" value="Logout">
-                            </form>
-                        </a>
+                        <form method="post" action="">
+                            <input type="submit" name="logout" value="Logout">
+                        </form>
                     </li>
                     <li class="nav-item dropdown">
                         <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,12 +63,12 @@ if ($buttonClicked) {
     <div class="container mt-4">
         <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
         <p>Transaction Logs</p>
+
+        <a href="create.php">Create Transaction</a>
         <div class="card">
             <table class="table">
                 <thead>
                     <tr>
-
-                        <th scope="col">Transaction ID</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Created At</th>
                         <th scope="col">Upddated At</th>
@@ -80,8 +78,7 @@ if ($buttonClicked) {
                 </thead>
                 <tbody>
                     <?php for ($i = 0; $i < count($transactions); $i++) { ?>
-                        <tr>
-                            <td><?php echo $transactions[$i]['transaction_id']; ?></td>
+                        <tr> 
                             <td><?php echo $transactions[$i]['amount']; ?></td>
                             <td><?php echo $transactions[$i]['created_at']; ?></td>
                             <td><?php echo $transactions[$i]['updated_at']; ?></td>
