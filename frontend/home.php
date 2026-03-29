@@ -5,8 +5,6 @@ User::isLoggedIn();
 Transaction::getTransaction();
 $transactions = Transaction::getTransaction();
 
-// echo $_SESSION['username'] . " is logged in!"; // Display the logged-in user's username 
-
 $buttonClicked = $_POST['logout'] ?? false; // Check if the logout button was clicked
 if ($buttonClicked) {
     User::logoutUser(); // Call the logoutUser method to handle the logout process

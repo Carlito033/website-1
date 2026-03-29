@@ -5,16 +5,17 @@ $transaction_id = $_GET['id'] ?? '';
 User::isLoggedIn();
 $transactions = Transaction::getSpecificTransaction($transaction_id);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $amount = $_POST['amount'] ?? '';
-    Transaction::updateTransaction($transaction_id, $amount);
-    header("Location:../home.php");
-}
-
 if (isset($_POST['delete'])) {
     Transaction::deleteTransaction($transaction_id);
     header("Location:../home.php");
+} else {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $amount = $_POST['amount'] ?? '';
+        Transaction::updateTransaction($transaction_id, $amount);
+        header("Location:../home.php");
+    }
 }
+
 ?>
 
 <!DOCTYPE html>
